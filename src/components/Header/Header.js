@@ -3,14 +3,16 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Header = () => {
     const navigate = useNavigate();
-    const [user, loading, error] = useAuthState(auth);
+    const [user] = useAuthState(auth);
 
     const handleSignOut = () => {
         signOut(auth)
-            .then(() => alert('sign out successful'));
+            .then(() => toast('Logged Out Successfully!!!'));
     }
 
     return (
@@ -47,6 +49,7 @@ const Header = () => {
                     }
                 </nav>
             </div>
+            <ToastContainer />
         </header>
     );
 };

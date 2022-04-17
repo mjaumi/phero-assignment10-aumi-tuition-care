@@ -1,10 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { async } from '@firebase/util';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Signup = () => {
     const [
@@ -14,6 +15,7 @@ const Signup = () => {
         error,
     ] = useCreateUserWithEmailAndPassword(auth);
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [sendEmailVerification, sending, verificationError] = useSendEmailVerification(auth);
 
     const [signupError, setSignupError] = useState('');
 
@@ -27,7 +29,9 @@ const Signup = () => {
         if (password === confirmPassword) {
 
             await createUserWithEmailAndPassword(email, password);
-            await updateProfile({ displayName: name });
+            updateProfile({ displayName: name });
+            await sendEmailVerification();
+            toast('An verification email is sent. Please, check your email.');
         }
         else {
             setSignupError("Your Given Two Passwords Didn't Match");
@@ -68,8 +72,8 @@ const Signup = () => {
                     </div>
                     <div className='mt-2'>
                         <p className='text-red-600'>{signupError}</p>
-                        <p className='text-red-600'>{error.message}</p>
-                        <p className='text-red-600'>{updateError.message}</p>
+                        <p className='text-red-600'>{error?.message}</p>
+                        <p className='text-red-600'>{updateError?.message}</p>
                     </div>
                     <div className='mt-10'>
                         <h4 className='font-bold text-2xl text-tuition-care-base'>Social Login</h4>
@@ -86,6 +90,7 @@ const Signup = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 };

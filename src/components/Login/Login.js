@@ -1,9 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [
@@ -12,17 +14,34 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+    const [sendPasswordResetEmail, sending, passReseterror] = useSendPasswordResetEmail(auth);
+
+    const emailRef = useRef('');
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
+
+    if (user) {
+        navigate(from, { replace: true });
+    }
 
     const handleLogin = async event => {
         event.preventDefault();
         const email = event.target.userEmail.value;
         const password = event.target.userPassword.value;
 
-        await signInWithEmailAndPassword(email, password)
-        navigate(from, { replace: true });
+        await signInWithEmailAndPassword(email, password);
+        toast('Logged In Successfully!!!');
+    }
+
+    const handleForgotPassword = async () => {
+        if (emailRef.current.value) {
+            await sendPasswordResetEmail(emailRef.current.value);
+            toast('Please, check your email.');
+        }
+        else {
+            toast('Please, enter your email address.');
+        }
     }
 
     return (
@@ -36,14 +55,18 @@ const Login = () => {
                     <form onSubmit={handleLogin}>
                         <div className='text-left text-tuition-care-base'>
                             <label className='ml-2' htmlFor="userEmail">Email</label>
-                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="email" name="userEmail" placeholder='Enter Your Email' required />
+                            <input ref={emailRef} className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="email" name="userEmail" placeholder='Enter Your Email' required />
                         </div>
                         <div className='text-left text-tuition-care-base mt-6'>
                             <label className='ml-2' htmlFor="userPassword">Password</label>
                             <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="password" name="userPassword" placeholder='Enter Your Password' required />
                         </div>
                         <div className='text-right text-tuition-care-base-light mt-3'>
-                            <button className='hover:opacity-50 duration-300 underline'>Forgot Password?</button>
+                            <button
+                                onClick={handleForgotPassword}
+                                className='hover:opacity-50 duration-300 underline'>
+                                Forgot Password?
+                            </button>
                         </div>
                         <div className='mt-2'>
                             <p className='text-red-600'>{error?.message && 'Invalid ID or Password'}</p>
@@ -70,6 +93,7 @@ const Login = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </section>
     );
 };
