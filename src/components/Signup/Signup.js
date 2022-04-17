@@ -1,9 +1,39 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
-import React from 'react';
+import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import auth from '../../firebase.init';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { async } from '@firebase/util';
 
 const Signup = () => {
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const [signupError, setSignupError] = useState('');
+
+    const handleSignupWithEmailAndPassword = async event => {
+        event.preventDefault();
+        const name = event.target.userName.value;
+        const email = event.target.userEmail.value;
+        const password = event.target.userPassword.value;
+        const confirmPassword = event.target.userConPassword.value;
+
+        if (password === confirmPassword) {
+
+            await createUserWithEmailAndPassword(email, password);
+            await updateProfile({ displayName: name });
+        }
+        else {
+            setSignupError("Your Given Two Passwords Didn't Match");
+        }
+    }
+
     return (
         <section className='h-screen pt-20 flex'>
             <div className='h-full w-[70%] bg-log-sign-banner-img bg-top bg-cover'>
@@ -12,22 +42,22 @@ const Signup = () => {
             <div className='w-[30%] mx-aut0 flex flex-col items-center justify-center p-7'>
                 <h2 className='text-tuition-care-base-light font-bold text-3xl text-left w-full ml-5 mb-5'>Signup Form</h2>
                 <div className='w-full bg-white p-8 rounded-3xl shadow-3xl'>
-                    <form>
+                    <form onSubmit={handleSignupWithEmailAndPassword}>
                         <div className='text-left text-tuition-care-base'>
-                            <label className='ml-2' htmlFor="user-name">Name</label>
-                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="text" name="user-name" placeholder='Enter Your Name' required />
+                            <label className='ml-2' htmlFor="userName">Name</label>
+                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="text" name="userName" placeholder='Enter Your Name' required />
                         </div>
                         <div className='text-left text-tuition-care-base mt-6'>
-                            <label className='ml-2' htmlFor="user-email">Email</label>
-                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="email" name="user-email" placeholder='Enter Your Email' required />
+                            <label className='ml-2' htmlFor="userEmail">Email</label>
+                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="email" name="userEmail" placeholder='Enter Your Email' required />
                         </div>
                         <div className='text-left text-tuition-care-base mt-6'>
-                            <label className='ml-2' htmlFor="user-password">Password</label>
-                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="password" name="user-password" placeholder='Enter Your Password' required />
+                            <label className='ml-2' htmlFor="userPassword">Password</label>
+                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="password" name="userPassword" placeholder='Enter Your Password' required />
                         </div>
                         <div className='text-left text-tuition-care-base mt-6'>
-                            <label className='ml-2' htmlFor="user-con-password">Confirm Password</label>
-                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="password" name="user-con-password" placeholder='Confirm Your Password' required />
+                            <label className='ml-2' htmlFor="userConPassword">Confirm Password</label>
+                            <input className='px-3 py-2 border-2 border-tuition-care-base outline-none rounded-xl w-full font-semibold' type="password" name="userConPassword" placeholder='Confirm Your Password' required />
                         </div>
                         <div className='mt-6'>
                             <button className='bg-tuition-care-base-light border-2 border-tuition-care-base-light w-full py-2 rounded-xl text-white font-medium text-lg hover:bg-transparent duration-300 hover:text-tuition-care-base-light'>signup</button>
@@ -35,6 +65,11 @@ const Signup = () => {
                     </form>
                     <div className='mt-2'>
                         <p className='text-tuition-care-base'>Already Have an account? <Link className='text-tuition-care-base-light underline' to='/login'>Login Now</Link></p>
+                    </div>
+                    <div className='mt-2'>
+                        <p className='text-red-600'>{signupError}</p>
+                        <p className='text-red-600'>{error.message}</p>
+                        <p className='text-red-600'>{updateError.message}</p>
                     </div>
                     <div className='mt-10'>
                         <h4 className='font-bold text-2xl text-tuition-care-base'>Social Login</h4>
