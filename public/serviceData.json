@@ -1,0 +1,57 @@
+[
+
+    {
+        "id": 1001,
+        "thumbnail": "physics-school.jpg",
+        "serviceName": "Physics for School",
+        "class": "9-10",
+        "salary": 3000,
+        "negotiable": true
+    },
+
+    {
+        "id": 1002,
+        "thumbnail": "chemistry-school.jpg",
+        "serviceName": "Chemistry for School",
+        "class": "9-10",
+        "salary": 3000,
+        "negotiable": true
+    },
+
+    {
+        "id": 1003,
+        "thumbnail": "math-school.jpg",
+        "serviceName": "Math & Higher Math for School",
+        "class": "9-10",
+        "salary": 4000,
+        "negotiable": false
+    },
+
+    {
+        "id": 1004,
+        "thumbnail": "physics-college.jpg",
+        "serviceName": "Physics for College",
+        "class": "11-12",
+        "salary": 3500,
+        "negotiable": false
+    },
+
+    {
+        "id": 1005,
+        "thumbnail": "chemistry-college.jpg",
+        "serviceName": "Chemistry for College",
+        "class": "11-12",
+        "salary": 3500,
+        "negotiable": true
+    },
+
+    {
+        "id": 1006,
+        "thumbnail": "math-college.jpg",
+        "serviceName": "Higher Math for College",
+        "class": "11-12",
+        "salary": 4500,
+        "negotiable": false
+    }
+
+]

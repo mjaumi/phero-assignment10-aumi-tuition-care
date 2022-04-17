@@ -9,6 +9,10 @@ module.exports = {
       colors: {
         'tuition-care-base': '#011742',
         'tuition-care-base-light': '#0e59ed',
+        'tuition-care-text-base-light': '#058af7',
+      },
+      backgroundImage: {
+        'banner-img': "url('/src/images/banner.jpg')",
       }
     },
   },
