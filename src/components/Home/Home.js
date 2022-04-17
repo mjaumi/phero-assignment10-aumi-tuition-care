@@ -1,4 +1,5 @@
 import React from 'react';
+import Services from '../Services/Services';
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
                     <p className='text-white mt-7 w-1/2 text-lg'>I am Milhan Joardar Aumi, a highly experienced home tutor who teaches Physics, Chemistry, Mathematics and Higher Mathematics from class 9 to class 12.</p>
                 </div>
             </div>
+            <Services />
         </section>
     );
 };
