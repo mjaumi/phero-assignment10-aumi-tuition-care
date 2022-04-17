@@ -1,11 +1,10 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import { useCreateUserWithEmailAndPassword, useSendEmailVerification, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SocialLogin from '../SocialLogin/SocialLogin';
 
 const Signup = () => {
     const [
@@ -75,19 +74,7 @@ const Signup = () => {
                         <p className='text-red-600'>{error?.message}</p>
                         <p className='text-red-600'>{updateError?.message}</p>
                     </div>
-                    <div className='mt-10'>
-                        <h4 className='font-bold text-2xl text-tuition-care-base'>Social Login</h4>
-                        <div className='mt-5'>
-                            <button className='text-tuition-care-base border-2 border-tuition-care-base w-full p-2 rounded-xl font-semibold hover:bg-tuition-care-base hover:text-white duration-300'>
-                                <FontAwesomeIcon className='mr-2' icon={faGoogle} />
-                                Login With Google
-                            </button>
-                            <button className='block mt-3 bg-tuition-care-base-light border-2 border-tuition-care-base-light text-white w-full p-2 rounded-xl font-semibold hover:bg-transparent hover:text-tuition-care-base-light duration-300'>
-                                <FontAwesomeIcon className='mr-2' icon={faFacebookF} />
-                                Login With Facebook
-                            </button>
-                        </div>
-                    </div>
+                    <SocialLogin />
                 </div>
             </div>
             <ToastContainer />

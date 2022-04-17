@@ -1,9 +1,8 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGoogle, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 import React, { useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import SocialLogin from '../SocialLogin/SocialLogin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -22,6 +21,7 @@ const Login = () => {
     const from = location.state?.from?.pathname || "/";
 
     if (user) {
+        toast('Logged In Successfully!!!');
         navigate(from, { replace: true });
     }
 
@@ -31,7 +31,6 @@ const Login = () => {
         const password = event.target.userPassword.value;
 
         await signInWithEmailAndPassword(email, password);
-        toast('Logged In Successfully!!!');
     }
 
     const handleForgotPassword = async () => {
@@ -78,19 +77,7 @@ const Login = () => {
                     <div className='mt-2'>
                         <p className='text-tuition-care-base'>Don't Have an account? <Link className='text-tuition-care-base-light underline' to='/signup'>Register Now</Link></p>
                     </div>
-                    <div className='mt-10'>
-                        <h4 className='font-bold text-2xl text-tuition-care-base'>Social Login</h4>
-                        <div className='mt-5'>
-                            <button className='text-tuition-care-base border-2 border-tuition-care-base w-full p-2 rounded-xl font-semibold hover:bg-tuition-care-base hover:text-white duration-300'>
-                                <FontAwesomeIcon className='mr-2' icon={faGoogle} />
-                                Login With Google
-                            </button>
-                            <button className='block mt-3 bg-tuition-care-base-light border-2 border-tuition-care-base-light text-white w-full p-2 rounded-xl font-semibold hover:bg-transparent hover:text-tuition-care-base-light duration-300'>
-                                <FontAwesomeIcon className='mr-2' icon={faFacebookF} />
-                                Login With Facebook
-                            </button>
-                        </div>
-                    </div>
+                    <SocialLogin />
                 </div>
             </div>
             <ToastContainer />
