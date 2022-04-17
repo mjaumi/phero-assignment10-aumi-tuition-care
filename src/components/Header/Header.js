@@ -1,7 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+    const navigate = useNavigate();
+
     return (
         <header className='bg-tuition-care-base fixed w-full'>
             <div className='w-4/5 mx-auto text-white py-4 flex justify-between items-center'>
@@ -17,7 +19,9 @@ const Header = () => {
                     <Link className='hover:opacity-40 duration-300 ml-5' to='/blogs'>Blogs</Link>
                     <Link className='hover:opacity-40 duration-300 ml-5' to='/about'>About</Link>
 
-                    <button className='ml-5 hover:opacity-40 duration-300 bg-tuition-care-base-light px-5 py-2 rounded-lg'>Login</button>
+                    <button
+                        onClick={() => navigate('/login')}
+                        className='ml-5 hover:opacity-40 duration-300 bg-tuition-care-base-light px-5 py-2 rounded-lg'>Login</button>
                 </nav>
             </div>
         </header>

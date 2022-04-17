@@ -4,7 +4,7 @@ import Services from '../Services/Services';
 const Home = () => {
     return (
         <section>
-            <div className='bg-banner-img h-[90vh] bg-center bg-cover bg-black/50 bg-blend-multiply'>
+            <div className='bg-banner-img h-screen bg-center bg-cover bg-black/50 bg-blend-multiply'>
                 <div className='flex flex-col justify-center items-center h-full'>
                     <h2 className='text-white text-5xl font-extrabold capitalize'>Looking for a <span className='text-tuition-care-text-base-light'>home tutor</span> <br /> for your beloved child?</h2>
                     <h5 className='text-white text-2xl mt-4'>Don't worry I am here to help you out!!</h5>

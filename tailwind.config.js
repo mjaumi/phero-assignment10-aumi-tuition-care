@@ -13,6 +13,10 @@ module.exports = {
       },
       backgroundImage: {
         'banner-img': "url('/src/images/banner.jpg')",
+        'log-sign-banner-img': "url('/src/images/log-sign-banner.jpg')",
+      },
+      boxShadow: {
+        '3xl': 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
       }
     },
   },
