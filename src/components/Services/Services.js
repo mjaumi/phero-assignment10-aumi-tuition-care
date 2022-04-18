@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import useServiceData from '../../hooks/useServiceData';
 import Service from '../Service/Service';
 
 const Services = () => {
-    const [services, setServices] = useState([]);
-
-    useEffect(() => {
-        fetch('serviceData.json')
-            .then(res => res.json())
-            .then(data => setServices(data));
-    }, [])
+    const [services] = useServiceData();
 
     return (
         <section className='w-4/5 mx-auto m-28'>
@@ -21,6 +15,7 @@ const Services = () => {
                     ></Service>)
                 }
             </div>
+            {console.log(services)}
         </section>
     );
 };
