@@ -99,13 +99,13 @@ const Login = () => {
                     <div className='mt-2'>
                         <p className='text-tuition-care-base'>Don't Have an account? <Link className='text-tuition-care-base-light underline' to='/signup'>Register Now</Link></p>
                     </div>
+                    <div className='mt-5'>
+                        {
+                            showLoading && <Loading />
+                        }
+                    </div>
                     <SocialLogin />
                 </div>
-            </div>
-            <div>
-                {
-                    showLoading && <Loading />
-                }
             </div>
             <ToastContainer />
         </section>

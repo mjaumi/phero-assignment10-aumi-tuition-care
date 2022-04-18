@@ -95,13 +95,13 @@ const Signup = () => {
                         <p className='text-red-600'>{updateError?.message}</p>
                         <p className='text-red-600'>{verificationError?.message}</p>
                     </div>
+                    <div className='mt-5'>
+                        {
+                            showLoading && <Loading />
+                        }
+                    </div>
                     <SocialLogin />
                 </div>
-            </div>
-            <div>
-                {
-                    showLoading && <Loading />
-                }
             </div>
             <ToastContainer />
         </section>

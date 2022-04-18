@@ -1,12 +1,13 @@
 import { signOut } from 'firebase/auth';
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMultiply, faBars } from '@fortawesome/free-solid-svg-icons';
+import CustomLink from '../CustomLink/CustomLink';
 
 const Header = () => {
     //initializing react hooks
@@ -38,11 +39,11 @@ const Header = () => {
                             <FontAwesomeIcon className='h-7 w-7' icon={faBars} />
                     }
                 </div>
-                <nav className={`absolute md:static w-full md:w-fit p-5 md:p-0 bg-tuition-care-base left-1/2 -translate-x-1/2 md:translate-x-0 duration-500 ${menuClick ? 'top-14' : 'top-[-350px]'}  flex flex-col md:flex-row justify-center md:items-center -z-50 md:z-50`}>
-                    <Link className='hover:opacity-40 duration-300 mt-5 md:mt-0' to='/'>Home</Link>
-                    <Link className='hover:opacity-40 duration-300 mt-2 md:mt-0 md:ml-5' to='/packages'>Packages</Link>
-                    <Link className='hover:opacity-40 duration-300 mt-2 md:mt-0 md:ml-5' to='/blogs'>Blogs</Link>
-                    <Link className='hover:opacity-40 duration-300 mt-2 md:mt-0 md:ml-5' to='/about'>About</Link>
+                <nav className={`absolute md:static w-full md:w-fit p-5 md:p-0 bg-tuition-care-base left-1/2 -translate-x-1/2 md:translate-x-0 duration-500 ${menuClick ? 'top-[90px]' : 'top-[-450px]'}  flex flex-col md:flex-row justify-center md:items-center -z-50 md:z-50`}>
+                    <CustomLink to='/'>Home</CustomLink>
+                    <CustomLink to='/packages'>Packages</CustomLink>
+                    <CustomLink to='/blogs'>Blogs</CustomLink>
+                    <CustomLink to='/about'>About</CustomLink>
 
                     {
                         user ?

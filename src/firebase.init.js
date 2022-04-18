@@ -6,12 +6,12 @@ import { getAuth } from 'firebase/auth';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: process.env.REACT_APP_apiKey,
-    authDomain: process.env.REACT_APP_authDomain,
-    projectId: process.env.projectId,
-    storageBucket: process.env.REACT_APP_storageBucket,
-    messagingSenderId: process.env.REACT_APP_messagingSenderId,
-    appId: process.env.REACT_APP_appId
+    apiKey: 'AIzaSyBBjYXFl_YflKBbTCRzTaV01rP_jwWnenY',
+    authDomain: 'aumi-tuition-care.firebaseapp.com',
+    projectId: 'aumi-tuition-care',
+    storageBucket: 'aumi-tuition-care.appspot.com',
+    messagingSenderId: '676186733505',
+    appId: '1:676186733505:web:afb2edb0d35a55f3780d40'
 };
 
 // Initialize Firebase
