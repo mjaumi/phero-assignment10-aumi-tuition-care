@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMultiply } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import usePackageData from '../../hooks/usePackageData';
 
 const Checkout = () => {
@@ -10,6 +10,7 @@ const Checkout = () => {
     const [packages] = usePackageData();
     const [service, setService] = useState({});
     const [showModal, setShowModal] = useState(false);
+    const navigate = useNavigate();
 
     //initializing react reference hook
     const nameRef = useRef('');
@@ -27,6 +28,11 @@ const Checkout = () => {
         if (nameRef.current.value && phoneNoRef.current.value && addressRef.current.value) {
             setShowModal(true);
         }
+    }
+
+    const handleModalButton = () => {
+        setShowModal(false);
+        navigate('/');
     }
 
     //rendering the checkout component
@@ -108,7 +114,7 @@ const Checkout = () => {
                                     <button
                                         className="bg-tuition-care-base-light hover:opacity-40 duration-300 text-white active:bg-emerald-600 font-medium text-sm px-6 py-3 rounded-xl shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 transition-all"
                                         type="button"
-                                        onClick={() => setShowModal(false)}
+                                        onClick={handleModalButton}
                                     >
                                         Okay, Thank you
                                     </button>
