@@ -1,0 +1,27 @@
+[
+
+    {
+        "id": 1001,
+        "userName": "Taylor Wright",
+        "userImg": "https://images.unsplash.com/photo-1517630800677-932d836ab680?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "reviewText": "Aumi was my son's tutor from class 9 to SSC exam. He always worked hard after my son and gave him a lot of time too. As a result my son got GPA 5 in SSC exam. He is such a great tutor.",
+        "rating": 5.00
+    },
+
+    {
+        "id": 1002,
+        "userName": "Ashley Nurse",
+        "userImg": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "reviewText": "My daughter was under Aumi's tuition from class 11 till her admission exam. He always explains the topics so elaborately that it was very easy for my daughter to understand it. I highly recommend Aumi.",
+        "rating": 4.75
+    },
+
+    {
+        "id": 1003,
+        "userName": "Joseph Gonzalez",
+        "userImg": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+        "reviewText": "Aumi taught my daughter when she was preparing herself for the admission exam. And by aumi's efforts and my daughter's dedication, she got chance in the University of Dhaka. He is a great tutor. Highly recommended.",
+        "rating": 4.50
+    }
+
+]

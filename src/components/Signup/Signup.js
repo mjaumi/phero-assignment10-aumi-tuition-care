@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import SocialLogin from '../SocialLogin/SocialLogin';
+import Loading from '../Loading/Loading';
 
 const Signup = () => {
+    //react firebase hook initialization
     const [
         createUserWithEmailAndPassword,
         user,
@@ -16,8 +18,16 @@ const Signup = () => {
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const [sendEmailVerification, sending, verificationError] = useSendEmailVerification(auth);
 
+    //react hook initialization
     const [signupError, setSignupError] = useState('');
+    const [showLoading, setShowLoading] = useState(false);
 
+    //checking for user
+    if (user) {
+        toast('Signed Up Successfully!!!');
+    }
+
+    //event handler for signup button
     const handleSignupWithEmailAndPassword = async event => {
         event.preventDefault();
         const name = event.target.userName.value;
@@ -25,11 +35,20 @@ const Signup = () => {
         const password = event.target.userPassword.value;
         const confirmPassword = event.target.userConPassword.value;
 
+        //checking both password is same or not
         if (password === confirmPassword) {
 
             await createUserWithEmailAndPassword(email, password);
             updateProfile({ displayName: name });
             await sendEmailVerification();
+
+            if (loading || sending || updating) {
+                setShowLoading(true);
+            }
+            else {
+                setShowLoading(true);
+            }
+
             toast('An verification email is sent. Please, check your email.');
         }
         else {
@@ -37,13 +56,14 @@ const Signup = () => {
         }
     }
 
+    //rendering signup component
     return (
-        <section className='h-screen pt-20 flex'>
-            <div className='h-full w-[70%] bg-log-sign-banner-img bg-top bg-cover'>
+        <section className='min-h-screen pt-24 md:pt-20 pb-20 md:pb-0 flex'>
+            <div className='hidden md:block h-screen w-[70%] bg-log-sign-banner-img bg-top bg-cover'>
 
             </div>
-            <div className='w-[30%] mx-aut0 flex flex-col items-center justify-center p-7'>
-                <h2 className='text-tuition-care-base-light font-bold text-3xl text-left w-full ml-5 mb-5'>Signup Form</h2>
+            <div className='w-full md:w-[30%] mx-aut0 flex flex-col items-center justify-center p-3 md:p-7'>
+                <h2 className='text-tuition-care-base-light font-bold text-3xl text-left w-full ml-5 mb-5'>Signup</h2>
                 <div className='w-full bg-white p-8 rounded-3xl shadow-3xl'>
                     <form onSubmit={handleSignupWithEmailAndPassword}>
                         <div className='text-left text-tuition-care-base'>
@@ -73,9 +93,15 @@ const Signup = () => {
                         <p className='text-red-600'>{signupError}</p>
                         <p className='text-red-600'>{error?.message}</p>
                         <p className='text-red-600'>{updateError?.message}</p>
+                        <p className='text-red-600'>{verificationError?.message}</p>
                     </div>
                     <SocialLogin />
                 </div>
+            </div>
+            <div>
+                {
+                    showLoading && <Loading />
+                }
             </div>
             <ToastContainer />
         </section>

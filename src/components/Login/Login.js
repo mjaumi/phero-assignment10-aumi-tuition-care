@@ -1,41 +1,61 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import SocialLogin from '../SocialLogin/SocialLogin';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Loading from '../Loading/Loading';
 
 const Login = () => {
+    //react firebase hook initialization
     const [
         signInWithEmailAndPassword,
         user,
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-    const [sendPasswordResetEmail, sending, passReseterror] = useSendPasswordResetEmail(auth);
+    const [sendPasswordResetEmail, sending, passResetError] = useSendPasswordResetEmail(auth);
 
+    //react hooks initialization
+    const [showLoading, setShowLoading] = useState(false);
     const emailRef = useRef('');
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || "/";
 
+    //checking for user
     if (user) {
         toast('Logged In Successfully!!!');
         navigate(from, { replace: true });
     }
 
+    //event handler for log in button
     const handleLogin = async event => {
         event.preventDefault();
         const email = event.target.userEmail.value;
         const password = event.target.userPassword.value;
 
         await signInWithEmailAndPassword(email, password);
+
+        if (loading) {
+            setShowLoading(true);
+        }
+        else {
+            setShowLoading(true);
+        }
     }
 
+    //event handler for forgot password
     const handleForgotPassword = async () => {
         if (emailRef.current.value) {
             await sendPasswordResetEmail(emailRef.current.value);
+            if (sending) {
+                setShowLoading(true);
+            }
+            else {
+                setShowLoading(true);
+            }
             toast('Please, check your email.');
         }
         else {
@@ -43,13 +63,14 @@ const Login = () => {
         }
     }
 
+    //rendering the login component here
     return (
         <section className='h-screen pt-20 flex'>
-            <div className='h-full w-[70%] bg-log-sign-banner-img bg-top bg-cover'>
+            <div className='hidden md:block h-full w-[70%] bg-log-sign-banner-img bg-top bg-cover'>
 
             </div>
-            <div className='w-[30%] mx-aut0 flex flex-col items-center justify-center p-7'>
-                <h2 className='text-tuition-care-base-light font-bold text-3xl text-left w-full ml-5 mb-5'>Login Form</h2>
+            <div className='w-full md:w-[30%] mx-aut0 flex flex-col items-center justify-center p-3 md:p-7'>
+                <h2 className='text-tuition-care-base-light font-bold text-3xl text-left w-full ml-5 mb-5'>Login</h2>
                 <div className='w-full bg-white p-8 rounded-3xl shadow-3xl'>
                     <form onSubmit={handleLogin}>
                         <div className='text-left text-tuition-care-base'>
@@ -69,6 +90,7 @@ const Login = () => {
                         </div>
                         <div className='mt-2'>
                             <p className='text-red-600'>{error?.message && 'Invalid ID or Password'}</p>
+                            <p className='text-red-600'>{passResetError?.message && 'Failed To Reset The Password'}</p>
                         </div>
                         <div className='mt-6'>
                             <button className='bg-tuition-care-base-light border-2 border-tuition-care-base-light w-full py-2 rounded-xl text-white font-medium text-lg hover:bg-transparent duration-300 hover:text-tuition-care-base-light'>Login</button>
@@ -79,6 +101,11 @@ const Login = () => {
                     </div>
                     <SocialLogin />
                 </div>
+            </div>
+            <div>
+                {
+                    showLoading && <Loading />
+                }
             </div>
             <ToastContainer />
         </section>

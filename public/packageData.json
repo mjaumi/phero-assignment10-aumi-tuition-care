@@ -3,60 +3,60 @@
     {
         "id": 1001,
         "thumbnail": "physics-school",
-        "serviceName": "Physics for School",
+        "packageName": "Physics for School",
         "studentClass": "9-10",
         "daysPerWeek": "3 Days/Week",
-        "salary": 3000,
+        "charge": 3000,
         "negotiable": true
     },
 
     {
         "id": 1002,
         "thumbnail": "chemistry-school",
-        "serviceName": "Chemistry for School",
+        "packageName": "Chemistry for School",
         "studentClass": "9-10",
         "daysPerWeek": "3 Days/Week",
-        "salary": 3000,
+        "charge": 3000,
         "negotiable": true
     },
 
     {
         "id": 1003,
         "thumbnail": "math-school",
-        "serviceName": "Math & Higher Math for School",
+        "packageName": "Math & Higher Math for School",
         "studentClass": "9-10",
         "daysPerWeek": "3 Days/Week",
-        "salary": 4000,
+        "charge": 4000,
         "negotiable": false
     },
 
     {
         "id": 1004,
         "thumbnail": "physics-college",
-        "serviceName": "Physics for College",
+        "packageName": "Physics for College",
         "studentClass": "11-12",
         "daysPerWeek": "3 Days/Week",
-        "salary": 3500,
+        "charge": 3500,
         "negotiable": false
     },
 
     {
         "id": 1005,
         "thumbnail": "chemistry-college",
-        "serviceName": "Chemistry for College",
+        "packageName": "Chemistry for College",
         "studentClass": "11-12",
         "daysPerWeek": "3 Days/Week",
-        "salary": 3500,
+        "charge": 3500,
         "negotiable": true
     },
 
     {
         "id": 1006,
         "thumbnail": "math-college",
-        "serviceName": "Higher Math for College",
+        "packageName": "Higher Math for College",
         "studentClass": "11-12",
         "daysPerWeek": "3 Days/Week",
-        "salary": 4500,
+        "charge": 4500,
         "negotiable": false
     }
 

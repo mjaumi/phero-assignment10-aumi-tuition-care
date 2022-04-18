@@ -2,35 +2,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMultiply } from '@fortawesome/free-solid-svg-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import useServiceData from '../../hooks/useServiceData';
+import usePackageData from '../../hooks/usePackageData';
 
 const Checkout = () => {
+    //initializing react hooks
     const { packageId } = useParams();
-    const [services] = useServiceData();
+    const [packages] = usePackageData();
     const [service, setService] = useState({});
     const [showModal, setShowModal] = useState(false);
 
+    //initializing react reference hook
     const nameRef = useRef('');
     const phoneNoRef = useRef('');
     const addressRef = useRef('');
 
+    //fetching the selected package
     useEffect(() => {
-        setService(services.find(service => service.id === parseInt(packageId)));
-    }, [packageId, services]);
+        setService(packages.find(service => service.id === parseInt(packageId)));
+    }, [packageId, packages]);
 
+    //event handler for proceed checkout button
     const handleProceedCheckout = (event) => {
         event.preventDefault();
         if (nameRef.current.value && phoneNoRef.current.value && addressRef.current.value) {
             setShowModal(true);
-            console.log('form submitted');
         }
     }
 
+    //rendering the checkout component
     return (
-        <section className='w-4/5 mx-auto pt-28'>
-            <h2 className='font-black text-4xl text-tuition-care-base'>Welcome to checkout</h2>
-            <div className='text-tuition-care-base grid grid-cols-2 gap-10'>
-                <div className='flex items-center w-full'>
+        <section className='w-[90%] md:w-4/5 mx-auto py-28'>
+            <h2 className='text-tuition-care-base font-bold text-2xl md:text-4xl'>Welcome to checkout</h2>
+            <div className='text-tuition-care-base grid grid-cols-1 md:grid-cols-2 gap-10'>
+                <div className='mt-10 md:mt-0 flex items-center w-full'>
                     <div className='w-full text-left border-2 border-tuition-care-base p-5 rounded-2xl'>
                         <h3 className='font-bold text-2xl'>You have chosen:</h3>
                         <div className='ml-8'>
@@ -43,9 +47,9 @@ const Checkout = () => {
                     </div>
                 </div>
                 <div className='mt-10'>
-                    <div className='w-4/5 mx-auto bg-white p-8 rounded-3xl shadow-3xl'>
+                    <div className='w-full md:w-4/5 float-right bg-white p-4 md:p-8 rounded-3xl shadow-3xl'>
                         <div className='text-tuition-care-base text-left w-full mb-5'>
-                            <h2 className=' font-bold text-3xl'>Checkout Form</h2>
+                            <h2 className=' font-bold text-3xl'>Checkout</h2>
                             <p>Please, fill up the form to checkout.</p>
                         </div>
                         <form onSubmit={handleProceedCheckout}>

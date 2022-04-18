@@ -5,15 +5,20 @@ import auth from '../../firebase.init';
 import Loading from '../Loading/Loading';
 
 const RequireAuth = ({ children }) => {
+    //hooks initialization
     const [user, loading] = useAuthState(auth);
     const location = useLocation();
 
+    //handling loading private components
     if (loading) {
         return (
-            <Loading />
+            <div className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2'>
+                <Loading />
+            </div>
         );
     }
 
+    //checking if user authentication is valid or not
     if (!user) {
         return <Navigate to="/login" state={{ from: location }} replace />;
     }
